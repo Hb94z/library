@@ -1,0 +1,48 @@
+body {
+    display: grid;
+    grid-template-rows: 10vh 80vh 10vh;
+
+}
+
+.header {
+background-color: grey;
+}
+
+.main {
+    display: grid;
+    grid-template-rows: 0.1fr 1fr;
+
+}
+.book-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.card {
+display: flex;
+flex-direction: column;
+height: 200px;
+width: 100px;
+background-color: red;
+}
+
+.name {
+    height: 100px;
+    width: 99px;
+background-color: green;
+
+}
+
+.pages {
+    height: 100px;
+    width: 99px;
+background-color: blue;
+}
+
+.footer {
+background-color: grey;
+}
