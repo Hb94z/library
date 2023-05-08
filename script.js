@@ -1,16 +1,17 @@
 
 let library = [
-    { title: "book1", pages: 30 },
-    { title: "book2", pages: 10 },
-    { title: "book3", pages: 44 },
+    { title: "book1", pages: 30, status: "Not read yet" },
+    { title: "book2", pages: 10, status: "Not read yet" },
+    { title: "book3", pages: 44, status: "Not read yet" },
 ];
 
 
 
-function book(title, pages) {
-  // the constructor...
+function book(title, pages, status) {
+
   this.title = title;
   this.pages = pages;
+  this.status = status;
   
 }
 
@@ -26,6 +27,11 @@ library.forEach((book, index) => {
     let bookContainer = document.querySelector(".book-container")
     let div = clone.querySelector(".Book");
     div.setAttribute("data-num", counter);
+    
+    div.setAttribute("data-read", "false");
+    let hasRead = div.querySelector(".HasRead");
+    hasRead.textContent = book.status;
+
   let title = div.querySelector(".BookTitle");
   title.textContent = "\"" + book.title + "\"";
   let pages = div.querySelector(".BookPages");
@@ -34,23 +40,43 @@ library.forEach((book, index) => {
   book.dataNum = `${counter}`;
   counter++;
   
+  document.querySelectorAll('.HasRead').forEach(button => {
+    button.addEventListener('click', () => {
+      let dataNum = button.parentNode.getAttribute('data-num');
+      if (book.status === "Not read yet" && book.dataNum === dataNum) {
+      book.status = "Read";
+      hasRead.textContent = book.status;
+      console.log(library);
+    
+      }
+      else if (book.status === "Read" && book.dataNum === dataNum) {
+        book.status = "Not read yet";
+        hasRead.textContent = book.status;
+        console.log(library);
+      }
+
+    })});
   remove();
 
-});
-
  
+});
 }
+
+
+
 
 function GetInfo() {
   let title = "Eagle";
   let pages = 55;
-  AddBookToLibrary(title, pages);
+  let status = "Not read yet";
+  AddBookToLibrary(title, pages, status);
 }
 
-function AddBookToLibrary (title, pages) {
+function AddBookToLibrary (title, pages, status) {
 let title1 = title;
 let pages1 = pages;
-const book1 = new book(title1, pages1);
+let status1 = status;
+const book1 = new book(title1, pages1, status1);
 console.log(book1);
 library.push(book1);
 console.log(library);
@@ -73,12 +99,31 @@ function remove() {
           return false;
         }
         return true;
+        
   });
     });
   });
-  //add event listner to the remove button.
-  //envoke remove function onclick
-  //remove function pops out the index of the book from array(data attribute in html)
-  //once again calls libraryLoop function. maybe there is a way to do that without having to call it.
-  //better to Removechild probably.
+
+}
+
+
+
+
+function toggleRead() {
+  document.querySelectorAll('.HasRead').forEach(button => {
+    button.addEventListener('click', () => {
+      let dataNum = button.parentNode.getAttribute('data-num');
+      let div = document.querySelector(".HasRead");
+      console.log(dataNum);
+      library.forEach((book, index) => {
+        if (book.dataNum === dataNum && book.status === "Not read yet"); {
+         book.status = "Read";
+         
+         div.textContent = book.status;
+         
+        }
+    });
+  });
+});
+
 }
