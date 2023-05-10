@@ -18,14 +18,11 @@ function displayBook() {
     let bookContainer = document.querySelector(".book-container")
     let div = clone.querySelector(".Book");
     div.setAttribute("data-num", counter);
-    
-    
-    div.setAttribute("data-read", "false"); //Maybe change logic to this
     let hasRead = div.querySelector(".HasRead");
     hasRead.textContent = newBook.status;
 
   let title = div.querySelector(".BookTitle");
-  title.textContent = "\"" + newBook.title + "\"";
+  title.textContent = "Title: " + newBook.title;
   let pages = div.querySelector(".BookPages");
   pages.textContent = newBook.pages + " pages";
   bookContainer.appendChild(clone);
