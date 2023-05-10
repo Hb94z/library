@@ -1,129 +1,122 @@
-
 let library = [
-    { title: "book1", pages: 30, status: "Not read yet" },
-    { title: "book2", pages: 10, status: "Not read yet" },
-    { title: "book3", pages: 44, status: "Not read yet" },
+
 ];
 
-
+let counter = 0;
 
 function book(title, pages, status) {
 
   this.title = title;
   this.pages = pages;
   this.status = status;
-  
 }
 
-let counter = 0;
-
-function libraryLoop() {
+function displayBook() {
   
- 
-
-library.forEach((book, index) => {
   let template = document.getElementById("newBook");
   let clone = template.content.cloneNode(true);
     let bookContainer = document.querySelector(".book-container")
     let div = clone.querySelector(".Book");
     div.setAttribute("data-num", counter);
     
-    div.setAttribute("data-read", "false");
+    
+    div.setAttribute("data-read", "false"); //Maybe change logic to this
     let hasRead = div.querySelector(".HasRead");
-    hasRead.textContent = book.status;
+    hasRead.textContent = newBook.status;
 
   let title = div.querySelector(".BookTitle");
-  title.textContent = "\"" + book.title + "\"";
+  title.textContent = "\"" + newBook.title + "\"";
   let pages = div.querySelector(".BookPages");
-  pages.textContent = book.pages + " pages";
+  pages.textContent = newBook.pages + " pages";
   bookContainer.appendChild(clone);
-  book.dataNum = `${counter}`;
+  newBook.dataNum = `${counter}`;
   counter++;
-  
-  document.querySelectorAll('.HasRead').forEach(button => {
-    button.addEventListener('click', () => {
-      let dataNum = button.parentNode.getAttribute('data-num');
+  dataNum = div.getAttribute('data-num');
+ hasRead.addEventListener("click", toggle);
+ function toggle() {
+  library.forEach((book) => {
+        let dataNum = div.getAttribute('data-num');
+      
       if (book.status === "Not read yet" && book.dataNum === dataNum) {
+        
       book.status = "Read";
       hasRead.textContent = book.status;
       console.log(library);
-    
-      }
-      else if (book.status === "Read" && book.dataNum === dataNum) {
+
+      } else if (book.status === "Read" && book.dataNum === dataNum) {
         book.status = "Not read yet";
         hasRead.textContent = book.status;
         console.log(library);
-      }
-
-    })});
-  remove();
-
- 
-});
+      }});
 }
 
-
-
+  remove();
+}
 
 function GetInfo() {
-  let title = "Eagle";
-  let pages = 55;
-  let status = "Not read yet";
+  let title = title2;
+  let pages = pages2;
+  let status = status2;
   AddBookToLibrary(title, pages, status);
 }
 
 function AddBookToLibrary (title, pages, status) {
 let title1 = title;
 let pages1 = pages;
+console.log(status);
 let status1 = status;
-const book1 = new book(title1, pages1, status1);
-console.log(book1);
-library.push(book1);
+newBook = new book(title1, pages1, status1);
+console.log(newBook);
+library.push(newBook);
 console.log(library);
-libraryLoop();
-
+displayBook(newBook);
 }
-
-
-GetInfo();
 
 function remove() {
   document.querySelectorAll('.Remove').forEach(button => {
     button.addEventListener('click', () => {
       let dataNum = button.parentNode.getAttribute('data-num');
-  console.log(dataNum)
-  library = library.filter((book, index) => {
+      console.log(dataNum)
+      library = library.filter((book, index) => {
         if (book.dataNum === dataNum) {
           let div = document.querySelector(`div[data-num="${dataNum}"]`);
           div.parentNode.removeChild(div);
+          
           return false;
+          
         }
-        return true;
         
+        return true;    
   });
-    });
+    }); 
   });
-
 }
 
+var modal = document.getElementById("add-book");
+var btn = document.getElementById("add-button");
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+} 
+let form = document.getElementById("addbookform")
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
+  title2 = document.getElementById("title").value;
+  pages2 = document.getElementById("pages").value;
+  status2 = document.getElementById('isRead').checked;
+  console.log(status2)
+  if (status2 === false) {
+    status2 = "Not read yet"
+  
+  }
+  if (status2 === true) {
+     status2 = "Read"
+  }
 
-
-function toggleRead() {
-  document.querySelectorAll('.HasRead').forEach(button => {
-    button.addEventListener('click', () => {
-      let dataNum = button.parentNode.getAttribute('data-num');
-      let div = document.querySelector(".HasRead");
-      console.log(dataNum);
-      library.forEach((book, index) => {
-        if (book.dataNum === dataNum && book.status === "Not read yet"); {
-         book.status = "Read";
-         
-         div.textContent = book.status;
-         
-        }
-    });
-  });
+GetInfo(title2, pages2, status2)
 });
-
-}

@@ -11,11 +11,11 @@
 <body>
     <div class="header">Header</div>
     <div class="main">
-        <button>Add book</button>
+        <button id="add-button">Add book</button>
         <div class="book-container">
           
         <template id="newBook">
-          <div class="Book" data-num="" data-read="false">
+          <div class="Book" data-num="">
               <p class="BookTitle"></p>
       
               <p class="BookAuthor"></p>
@@ -28,6 +28,39 @@
           </div>
       </template>
       
+    </div>
+    <div class="modal" id="add-book">
+        <form class="add-book-form" id="addbookform">
+            <h3>New book</h3>
+        <input
+          class="input"
+          type="text"
+          id="title"
+          placeholder="Title"
+          required
+          maxlength="100"
+        />
+        <input
+          class="input"
+          type="text"
+          id="author"
+          placeholder="Author"
+          maxlength="100"
+        />
+        <input
+          class="input"
+          type="number"
+          id="pages"
+          placeholder="Pages"
+          required
+          max="10000"
+        />
+        <div class="is-read">
+          <label for="is-read">Have you read it?</label>
+          <input class="checkbox" type="checkbox" id="isRead" />
+        </div>
+        <button class="form-button" type="submit">Submit</button>
+        </form>
     </div>
     <div class="footer"> footer</div>
 </body>
