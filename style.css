@@ -1,7 +1,7 @@
 body {
     display: grid;
-    grid-template-rows: 10vh 80vh 10vh;
-
+    grid-template-rows: 10fr 80fr 10fr;
+    height: 100vh;
 }
 
 .header {
@@ -11,11 +11,13 @@ align-items: center;
 justify-content: center;
 display: flex;
 color: white;
+height: 10vh;
 }
 
 .main {
     display: grid;
     grid-template-rows: 0.1fr 1fr;
+
 
 }
 .book-container {
@@ -25,32 +27,16 @@ color: white;
     align-items: center;
     justify-content: center;
     gap: 50px;
-}
-
-.card {
-display: flex;
-flex-direction: column;
-height: 200px;
-width: 100px;
-background-color: red;
-}
-
-.name {
-    height: 100px;
-    width: 99px;
-background-color: green;
+    box-sizing: border-box;
 
 }
 
-.pages {
-    height: 100px;
-    width: 99px;
-background-color: blue;
-}
 
 .footer {
 background-color: grey;
 height: 10vh;
+
+
 }
 
 .modal {
@@ -76,4 +62,11 @@ height: 10vh;
   width: 250px;
   padding-bottom: 20px;
   padding-top: 20px;
+  }
+
+  .Book {
+    background-color: rgb(233, 224, 224);
+    border: 2px;
+    box-shadow: 4px;
+    box-sizing: border-box;
   }
